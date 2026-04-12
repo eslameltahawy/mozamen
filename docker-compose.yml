@@ -30,7 +30,7 @@ services:
     networks:
       - activepieces
   postgres:
-    image: 'ankane/pgvector:v0.4.1'
+    image: 'ankane/pgvector:v0.5.1'
     container_name: postgres
     restart: unless-stopped
     env_file: .env
