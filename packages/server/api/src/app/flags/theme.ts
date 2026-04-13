@@ -64,7 +64,7 @@ export function generateTheme({
 }
 
 export const defaultTheme = generateTheme({
-    primaryColor: '#6e41e2',
+    primaryColor: '#0ea5e9',
     websiteName: 'Muzamen',
     fullLogoUrl: 'https://cdn.activepieces.com/brand/full-logo.png',
     favIconUrl: 'https://cdn.activepieces.com/brand/logo.svg',

@@ -55,6 +55,8 @@ import { STATIC_PAGES } from '../../global-search/static-pages';
 import { SidebarGeneralItemType } from '../ap-sidebar-group';
 import { ApSidebarItem, SidebarItemType } from '../ap-sidebar-item';
 import ProjectSideBarItem from '../project';
+import { SmawBadge } from '@/components/custom/smaw-badge';
+
 import { AppSidebarHeader } from '../sidebar-header';
 import SidebarUsageLimits from '../sidebar-usage-limits';
 import { SidebarUser } from '../sidebar-user';
@@ -373,6 +375,7 @@ export function ProjectDashboardSidebar({
           {state === 'expanded' && <DelayedSidebarUsageLimits />}
           <SidebarPlatformAdminLink />
           <SidebarUser />
+          {state === 'expanded' && <SmawBadge />}
         </SidebarFooter>
       </Sidebar>
     )

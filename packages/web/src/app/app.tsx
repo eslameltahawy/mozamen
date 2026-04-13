@@ -6,7 +6,7 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { t } from 'i18next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { ApErrorDialog } from '@/components/custom/ap-error-dialog/ap-error-dialog';
@@ -56,6 +56,11 @@ const queryClient = new QueryClient({
 
 export function App() {
   const { i18n } = useTranslation();
+
+  useEffect(() => {
+    document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n.language]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <RefreshAnalyticsProvider>
@@ -65,7 +70,7 @@ export function App() {
               <TelemetryProvider>
                 <TooltipProvider>
                   <React.Fragment key={i18n.language}>
-                    <ThemeProvider storageKey="vite-ui-theme">
+                    <ThemeProvider storageKey="vite-ui-theme" defaultTheme="dark">
                       <ApRouter />
                       <Toaster position="bottom-right" />
                       <ApErrorDialog />

@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { FullLogo } from '@/components/custom/full-logo';
+import { SmawBadge } from '@/components/custom/smaw-badge';
 import {
   Card,
   CardContent,
@@ -139,6 +140,7 @@ const AuthFormTemplate = React.memo(
 
           <BottomNote isSignup={isSignUp}></BottomNote>
         </Card>
+        <SmawBadge className="mt-2" />
       </>
     );
   },
