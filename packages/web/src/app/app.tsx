@@ -58,7 +58,9 @@ export function App() {
   const { i18n } = useTranslation();
 
   useEffect(() => {
-    document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+    const isRtl = i18n.language === 'ar';
+    document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
+    document.documentElement.lang = i18n.language;
   }, [i18n.language]);
 
   return (

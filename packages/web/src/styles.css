@@ -628,42 +628,47 @@
 }
 
 /* === Muzamen RTL Support === */
-[dir='rtl'] {
-  /* Reverse sidebar side: sidebar goes to the right, main content to the left */
-  [data-sidebar='sidebar'] {
-    order: 2;
-    border-left: none;
-    border-right: 1px solid var(--sidebar-border);
-  }
 
-  [data-sidebar='inset'],
-  main {
-    order: 1;
-  }
+/*
+ * The sidebar uses `fixed inset-y-0 left-0` positioning.
+ * Flex `order` has no effect on fixed elements.
+ * Solution: override left/right on the fixed container and swap the border.
+ * The flex wrapper with dir="rtl" automatically lays the gap div on the
+ * right side (first flex child in RTL row), so the content area fills left.
+ */
+[dir='rtl'] [data-slot='sidebar-container'] {
+  left: auto !important;
+  right: 0 !important;
+  border-right: none !important;
+  border-left: 1px solid var(--sidebar-border) !important;
+}
 
-  /* Flip directional navigation icons */
-  .lucide-chevron-right,
-  .lucide-arrow-right,
-  .lucide-arrow-left,
-  .lucide-move-left,
-  .lucide-move-right,
-  .lucide-chevrons-up-down {
-    transform: scaleX(-1);
-  }
+/* Collapsed (offcanvas) — slide off-screen to the right */
+[dir='rtl'] [data-slot='sidebar'][data-state='collapsed'][data-collapsible='offcanvas']
+  [data-slot='sidebar-container'] {
+  right: calc(var(--sidebar-width) * -1) !important;
+  left: auto !important;
+}
 
-  /* Sheet slides from the left in RTL */
-  [data-slot='sheet-content'][data-state='open'] {
-    --tw-enter-translate-x: -100% !important;
-  }
-  [data-slot='sheet-content'][data-state='closed'] {
-    --tw-exit-translate-x: -100% !important;
-  }
+/* Toaster: swap to bottom-left in RTL */
+[dir='rtl'] [data-sonner-toaster][data-x-position='right'] {
+  right: auto !important;
+  left: 0 !important;
+}
 
-  /* Text alignment */
-  .text-left { text-align: right; }
+/* Flip directional navigation icons for RTL */
+[dir='rtl'] .lucide-chevron-right,
+[dir='rtl'] .lucide-arrow-right,
+[dir='rtl'] .lucide-arrow-left,
+[dir='rtl'] .lucide-move-left,
+[dir='rtl'] .lucide-move-right {
+  transform: scaleX(-1);
+}
 
-  /* Logical margin/padding flips for inline utilities */
-  .pl-1 { padding-left: 0; padding-right: 0.25rem; }
-  .ml-auto { margin-left: 0; margin-right: auto; }
-  .mr-auto { margin-right: 0; margin-left: auto; }
+/* Sheet slides from the left in RTL */
+[dir='rtl'] [data-slot='sheet-content'][data-state='open'] {
+  --tw-enter-translate-x: -100% !important;
+}
+[dir='rtl'] [data-slot='sheet-content'][data-state='closed'] {
+  --tw-exit-translate-x: -100% !important;
 }
